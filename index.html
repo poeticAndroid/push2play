@@ -1,132 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>YouTube Push to Play!</title>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="style.css" />
+  <title>YouTube Push to Play!</title>
 
-    <!-- import the webpage's javascript file -->
-    <script>
-      if (location.protocol !== "https:") location.protocol = "https:"
-      if (location.pathname.includes("/index.html")) location.pathname = location.pathname.replace("/index.html", "/.")
-      else if (location.pathname.substr(-1) !== "/") location.pathname += "/"
-    </script>
+  <!-- import the webpage's stylesheet -->
+  <link rel="stylesheet" href="style.css" />
 
-    <script src="youtube_api.js"></script>
-    <script src="script.js" defer></script>
-  </head>
-  <body class="start">
-    <header>
-      <h1>YouTube Push to Play!</h1>
-    </header>
-    <form>
-      <p>Enter YouTube URL:</p>
-      <p title="Link to main video.">
-        <label>Main video:</label>
-        <input name="v" list="vlist" />
-      </p>
-      <p title="will play whenever main video is paused. Leave blank for no music.">
-        <label>Music video:</label>
-        <input name="m" list="mlist" />
+  <!-- import the webpage's javascript file -->
+  <script>
+    if (location.protocol !== "https:") location.protocol = "https:"
+    if (location.pathname.includes("/index.html")) location.pathname = location.pathname.replace("/index.html", "/.")
+    else if (location.pathname.substr(-1) !== "/") location.pathname += "/"
+  </script>
+
+  <script src="youtube_api.js"></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body class="start">
+  <header>
+    <h1>YouTube Push to Play!</h1>
+  </header>
+  <form>
+    <p>Enter YouTube URL:</p>
+    <p title="Link to main video.">
+      <label>Main video:</label>
+      <input name="v" list="vlist" />
+    </p>
+    <p title="will play whenever main video is paused. Leave blank for no music.">
+      <label>Music video:</label>
+      <input name="m" list="mlist" />
+    </p>
+    <p>
+      <input type="submit" value="Play" />
+    </p>
+    <p>
+      <datalist id="vlist"></datalist>
+      <datalist id="mlist"></datalist>
+    </p>
+    <table>
+      <tr>
+        <td colspan="2">
+          <h3>Keyboard shortcuts:</h3>
+        </td>
+      </tr>
+      <tr>
+        <th>Space: &nbsp;</th>
+        <td>Hold to play</td>
+      </tr>
+      <tr>
+        <th>Home: &nbsp;</th>
+        <td>Go to start</td>
+      </tr>
+      <tr>
+        <th>PgUp: &nbsp;</th>
+        <td>Go back 1 minute</td>
+      </tr>
+      <tr>
+        <th>PgDn: &nbsp;</th>
+        <td>Go forward 1 minute</td>
+      </tr>
+      <tr>
+        <th>&uarr; : &nbsp;</th>
+        <td>Go back 5 seconds</td>
+      </tr>
+      <tr>
+        <th>&darr; : &nbsp;</th>
+        <td>Go forward 5 seconds</td>
+      </tr>
+      <tr>
+        <th>&larr;: &nbsp;</th>
+        <td>Go back 1 seconds</td>
+      </tr>
+      <tr>
+        <th>&rarr;: &nbsp;</th>
+        <td>Play for 1 second</td>
+      </tr>
+      <tr>
+        <th>J: &nbsp;</th>
+        <td>Go back 10 seconds</td>
+      </tr>
+      <tr>
+        <th>K: &nbsp;</th>
+        <td>Play continuously</td>
+      </tr>
+      <tr>
+        <th>L: &nbsp;</th>
+        <td>Go forward 10 seconds</td>
+      </tr>
+      <tr>
+        <th>M: &nbsp;</th>
+        <td>Mute/unmute</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="2">Video will pause automatically<br />when you leave the tab.</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          With the mouse cursor in the center,<br />
+          use scroll wheel to play or scrub<br />
+          through the video.
+        </td>
+      </tr>
+    </table>
+    <p>
+    <details>
+      <summary>Manage data</summary>
+      <p>
+        <button id="clearBtn">Clear data</button>
+        <button id="resetBmBtn">Reset progress</button>
+        <button id="deleteBtn">Delete entry</button>
       </p>
       <p>
-        <input type="submit" value="Play" />
+        <textarea id="jsonTxt" cols="80" rows="20"></textarea>
       </p>
-      <p>
-        <datalist id="vlist"></datalist>
-        <datalist id="mlist"></datalist>
-      </p>
-      <table>
-        <tr>
-          <td colspan="2"><h3>Keyboard shortcuts:</h3></td>
-        </tr>
-        <tr>
-          <th>Space: &nbsp;</th>
-          <td>Hold to play</td>
-        </tr>
-        <tr>
-          <th>Home: &nbsp;</th>
-          <td>Go to start</td>
-        </tr>
-        <tr>
-          <th>PgUp: &nbsp;</th>
-          <td>Go back 1 minute</td>
-        </tr>
-        <tr>
-          <th>PgDn: &nbsp;</th>
-          <td>Go forward 1 minute</td>
-        </tr>
-        <tr>
-          <th>&uarr; : &nbsp;</th>
-          <td>Go back 5 seconds</td>
-        </tr>
-        <tr>
-          <th>&darr; : &nbsp;</th>
-          <td>Go forward 5 seconds</td>
-        </tr>
-        <tr>
-          <th>&larr;: &nbsp;</th>
-          <td>Go back 1 seconds</td>
-        </tr>
-        <tr>
-          <th>&rarr;: &nbsp;</th>
-          <td>Play for 1 second</td>
-        </tr>
-        <tr>
-          <th>J: &nbsp;</th>
-          <td>Go back 10 seconds</td>
-        </tr>
-        <tr>
-          <th>K: &nbsp;</th>
-          <td>Play continuously</td>
-        </tr>
-        <tr>
-          <th>L: &nbsp;</th>
-          <td>Go forward 10 seconds</td>
-        </tr>
-        <tr>
-          <th>M: &nbsp;</th>
-          <td>Mute/unmute</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td colspan="2">Video will pause automatically<br />when you leave the tab.</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            With the mouse cursor in the center,<br />
-            use scroll wheel to play or scrub<br />
-            through the video.
-          </td>
-        </tr>
-      </table>
-      <p>
-        <details>
-          <summary>Manage data</summary>
-          <p>
-            <button id="clearBtn">Clear data</button>
-            <button id="resetBmBtn">Reset progress</button>
-            <button id="deleteBtn">Delete entry</button>
-          </p>
-          <p>
-            <textarea id="jsonTxt" cols="80" rows="20"></textarea>
-          </p>
-        </details>
-      </p>
-    </form>
-    <div id="yt"></div>
-    <div id="myt"></div>
-    <button id="ptpBtn" class="big">Push to Play</button>
-    <button id="openBtn" class="big">Open / Help</button>
-  </body>
+    </details>
+    </p>
+  </form>
+  <div id="yt"></div>
+  <div id="myt"></div>
+  <button id="ptpBtn" class="big">Push to Play</button>
+  <button id="openBtn" class="big">Open / Help</button>
+</body>
+
 </html>

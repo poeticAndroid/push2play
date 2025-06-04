@@ -6,6 +6,7 @@ body {
   color: white;
   font-family: sans-serif;
 }
+
 body.start {
   overflow: scroll;
 }
@@ -22,6 +23,7 @@ form {
   display: none;
   padding: 1em;
 }
+
 .start header,
 .start form {
   display: block;
@@ -42,6 +44,7 @@ summary {
 th {
   text-align: right;
 }
+
 td {
   text-align: left;
 }
@@ -49,6 +52,7 @@ td {
 .hidden {
   opacity: 0 !important;
 }
+
 .big {
   cursor: pointer;
   position: absolute;
@@ -58,6 +62,7 @@ td {
   opacity: 0.5;
   z-index: 1024;
 }
+
 .start .big {
   display: none;
 }
@@ -65,6 +70,7 @@ td {
 #yt {
   height: 100vh;
 }
+
 #myt {
   display: none;
 }
@@ -76,6 +82,7 @@ td {
   left: 45vw;
   right: 45vw;
 }
+
 #ptpBtn {
   top: 45vh;
   bottom: 45vh;
