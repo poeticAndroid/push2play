@@ -1,0 +1,84 @@
+body {
+  background-color: black;
+  text-align: center;
+  overflow: hidden;
+  min-height: 100vh;
+  color: white;
+  font-family: sans-serif;
+}
+body.start {
+  overflow: scroll;
+}
+
+form,
+input,
+button,
+p {
+  padding: 0.5em;
+}
+
+header,
+form {
+  display: none;
+  padding: 1em;
+}
+.start header,
+.start form {
+  display: block;
+}
+
+summary {
+  cursor: pointer;
+}
+
+* {
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: right;
+}
+td {
+  text-align: left;
+}
+
+.hidden {
+  opacity: 0 !important;
+}
+.big {
+  cursor: pointer;
+  position: absolute;
+  font-size: 3vmin;
+  border-radius: 1vmin;
+  touch-action: none;
+  opacity: 0.5;
+  z-index: 1024;
+}
+.start .big {
+  display: none;
+}
+
+#yt {
+  height: 100vh;
+}
+#myt {
+  display: none;
+}
+
+#openBtn {
+  font-size: 2vmin;
+  padding-top: 2vmin;
+  top: -1vmin;
+  left: 45vw;
+  right: 45vw;
+}
+#ptpBtn {
+  top: 45vh;
+  bottom: 45vh;
+  left: 45vw;
+  right: 45vw;
+}
