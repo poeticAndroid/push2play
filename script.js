@@ -396,4 +396,4 @@ function saveData() {
   localStorage.setItem(absUrl("save.json"), JSON.stringify(data, null, 2))
 }
 
-init()
+setTimeout(init)
