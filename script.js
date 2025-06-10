@@ -403,3 +403,7 @@ let _init_to = setInterval(e => {
     clearInterval(_init_to)
   }
 }, 128)
+
+setInterval(e => {
+  console.log("bookmark:", data.bookmarks[player.getVideoData().video_id])
+}, 1024)
