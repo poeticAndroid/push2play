@@ -5,7 +5,6 @@ let player,
   btn,
   openBtn,
   playState,
-  duration = 0,
   pauseTimer,
   laste,
   data = {
@@ -210,6 +209,7 @@ function pause(e) {
 }
 
 function update(e) {
+  if (!player.playerInfo.progressState.allowSeeking) return
   if (playState !== player.getPlayerState()) {
     playState = player.getPlayerState()
     console.log("playState:", playState)
@@ -217,14 +217,14 @@ function update(e) {
       // finished
       setTimeout((e) => {
         loadData()
-        if (duration <= player.getDuration()) data.bookmarks[player.getVideoData().video_id] = player.getDuration()
+        data.bookmarks[player.getVideoData().video_id] = player.getDuration()
         saveData()
 
         openBtn.classList.remove("hidden")
         if (music) music.playVideo()
       }, 256)
     } else {
-      if (duration <= player.getDuration() && data.bookmarks[player.getVideoData().video_id] >= player.getDuration()) {
+      if (data.bookmarks[player.getVideoData().video_id] >= player.getDuration()) {
         loadData()
         delete data.bookmarks[player.getVideoData().video_id]
         saveData()
@@ -248,13 +248,12 @@ function update(e) {
     } else {
       loadData()
       data.playbackRate = player.getPlaybackRate()
-      if (duration <= player.getDuration()) data.bookmarks[player.getVideoData().video_id] = Math.max(0, player.getCurrentTime() - 60)
+      data.bookmarks[player.getVideoData().video_id] = Math.max(0, player.getCurrentTime() - 60)
       saveData()
     }
     setTimeout(() => {
       btn.focus()
     }, 100)
-    duration = Math.max(duration || 0, player.getDuration() || 0)
   }
 }
 function musicUpdate(e) {
