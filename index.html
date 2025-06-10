@@ -13,11 +13,10 @@
 
   <!-- import the webpage's javascript file -->
   <script>
-    if (location.protocol !== "https:") location.protocol = "https:"
     if (location.pathname.includes("/index.html")) location.pathname = location.pathname.replace("/index.html", "/.")
     else if (location.pathname.substr(-1) !== "/") location.pathname += "/"
   </script>
-
+  <script src="https://unpkg.com/urlfs@1.1.0/urlfs.js"></script>
   <script src="youtube_api.js"></script>
 </head>
 
