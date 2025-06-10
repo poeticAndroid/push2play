@@ -397,4 +397,9 @@ function saveData() {
   localStorage.setItem(absUrl("save.json"), JSON.stringify(data, null, 2))
 }
 
-setTimeout(init)
+let _init_to = setInterval(e => {
+  if (YT) {
+    init()
+    clearInterval(_init_to)
+  }
+}, 128)
